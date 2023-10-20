@@ -2,7 +2,7 @@ schema-version: v2
 kind: plugin
 metadata:
   name: popcorn-springboot-base-plugin
-  display-name: popcorn-springboot-base-plugin
+  display-name: Spring Boot REST API Base Plugin
   description: Plugin base para construção de microsservicós que expoe APIs REST com Java e Spring Boot
   version: 0.0.1
   picture: plugin.png
@@ -17,6 +17,8 @@ spec:
   single-use: False
   technologies: # Ref: https://docs.stackspot.com/content-creator/studio/yaml-files/plugin-yaml/#technologies
     - Api
+    - Java
+    - Spring Boot
   stk-projects-only: false
   inputs:
     - label: Type name of your resource
