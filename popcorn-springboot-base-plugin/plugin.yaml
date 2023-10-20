@@ -20,23 +20,23 @@ spec:
     - Java
     - Spring Boot
   stk-projects-only: false
-  inputs:
-    - label: Type name of your resource
-      name: resource
-      type: text
-      required: true
-      default: Client
-      pattern: '([A-Z][a-z]+)+'
-      help: 'Inform your resource name (e.g.: Client)'
-    - label: Choose http method of new endpoint
-      name: method
-      type: text
-      items:
-        - GET
-        - POST
-        - PUT
-        - DELETE
-        - PATCH
-      default: GET
-      required: true
-      help: 'Inform the method of the endpoint (e.g.: post or delete)'
+  # inputs:
+  #   - label: Type name of your resource
+  #     name: resource
+  #     type: text
+  #     required: true
+  #     default: Client
+  #     pattern: '([A-Z][a-z]+)+'
+  #     help: 'Inform your resource name (e.g.: Client)'
+  #   - label: Choose http method of new endpoint
+  #     name: method
+  #     type: text
+  #     items:
+  #       - GET
+  #       - POST
+  #       - PUT
+  #       - DELETE
+  #       - PATCH
+  #     default: GET
+  #     required: true
+  #     help: 'Inform the method of the endpoint (e.g.: post or delete)'
