@@ -1,0 +1,7 @@
+##
+# Spring Application
+##
+spring:
+    jackson:
+        serialization:
+            indent_output: true

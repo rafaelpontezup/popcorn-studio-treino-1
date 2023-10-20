@@ -1,0 +1,22 @@
+##
+# Server
+##
+server:
+    port: 8080
+    servlet:
+        context-path: /
+    error:
+        include-message: always
+        include-binding-errors: always
+        include-stacktrace: on_param
+        include-exception: false
+
+##
+# Spring Application
+##
+spring:
+    application:
+        name: {{project_artifact_id_formatted}}
+    output:
+        ansi:
+            enabled: ALWAYS

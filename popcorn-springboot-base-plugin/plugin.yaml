@@ -56,6 +56,11 @@ spec:
     project_artifact_id_sanitized: "{{project_artifact_id_formatted | regex_replace('[^0-9a-zA-Z_]', '')}}"
     project_base_package: "{{project_group_id}}.{{project_artifact_id_sanitized}}"
     project_base_package_dir: "{{project_base_package | group_id_folder}}"
+  hooks:
+    - type: run
+      trigger: after-render
+      commands:
+        - chmod +x mvnw
 
 
     
