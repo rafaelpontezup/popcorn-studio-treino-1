@@ -20,23 +20,42 @@ spec:
     - Java
     - Spring Boot
   stk-projects-only: false
-  # inputs:
-  #   - label: Type name of your resource
-  #     name: resource
-  #     type: text
-  #     required: true
-  #     default: Client
-  #     pattern: '([A-Z][a-z]+)+'
-  #     help: 'Inform your resource name (e.g.: Client)'
-  #   - label: Choose http method of new endpoint
-  #     name: method
-  #     type: text
-  #     items:
-  #       - GET
-  #       - POST
-  #       - PUT
-  #       - DELETE
-  #       - PATCH
-  #     default: GET
-  #     required: true
-  #     help: 'Inform the method of the endpoint (e.g.: post or delete)'
+  inputs:
+    - label: Nome da aplicação
+      name: project_name
+      type: text
+      required: true
+    - label: Group_ID do Maven
+      name: project_group_id
+      type: text
+      default: br.com.zup.cinema
+      pattern: '(^[a-zA-Z_\d.]*[a-zA-Z_\d]$)'
+      required: true
+    - label: Artifact_ID do Maven
+      name: project_artifact_id
+      type: text
+      required: true
+      pattern: ^[a-z]([a-z0-9]|_)*$
+      help: Propriedade do Maven utilizado como nome do .jar gerado
+    - label: Versão do Spring Boot
+      name: project_springboot_version
+      type: text
+      default: 3.1.5
+      required: true
+    - label: Versão do Java
+      name: project_java_version
+      type: select
+      items:
+        - "17"
+        - "21"
+      default: 17
+      required: true
+  computed-inputs:
+    project_name_capitalized: "{{project_name | to_camel}}"
+    project_artifact_id_formatted: "{{project_artifact_id | lower | to_kebab}}"
+    project_artifact_id_sanitized: "{{project_artifact_id_formatted | regex_replace('[^0-9a-zA-Z_]', '')}}"
+    project_base_package: "{{project_group_id}}.{{project_artifact_id_sanitized}}"
+    project_base_package_dir: "{{project_base_package | group_id_folder}}"
+
+
+    
