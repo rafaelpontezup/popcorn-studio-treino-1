@@ -2,7 +2,7 @@ schema-version: v2
 kind: plugin
 metadata:
   name: popcorn-springboot-actuator-plugin
-  display-name: popcorn-springboot-actuator-plugin
+  display-name: Spring Boot Actuator plugin
   description: Habilita microsserviço a expor endpoint de monitoramento e health checking via modulo Spring Boot Actuator
   version: 0.0.1
   picture: plugin.png
@@ -20,22 +20,60 @@ spec:
     - Api
   stk-projects-only: false
   inputs:
-    - label: Type name of your resource
-      name: resource
-      type: text
+    - label: Escolha quais endpoints de monitoramento você quer expor?
+      name: actuator_endpoints
+      type: multiselect
       required: true
-      default: Client
-      pattern: '([A-Z][a-z]+)+'
-      help: 'Inform your resource name (e.g.: Client)'
-    - label: Choose http method of new endpoint
-      name: method
-      type: text
       items:
-        - GET
-        - POST
-        - PUT
-        - DELETE
-        - PATCH
-      default: GET
-      required: true
-      help: 'Inform the method of the endpoint (e.g.: post or delete)'
+        - health
+        - metrics
+        - env
+      default: health
+      help: Selecione quais endpoints de monitoramento serão expostos pelo Spring Boot Actuator
+  computed-inputs:
+    actuator_endpoints_joined: "{{ actuator_endpoints | join(',') }}"
+
+  hooks:
+    # - type: edit
+    #   path: pom.xml
+    #   trigger: after-render    
+    #   changes:
+    #       - search:
+    #           string: "</dependencies>"
+    #           insert-before:
+    #             snippet: snippets/snippet-pom.xml.jinja
+    #           when:
+    #             not-exists-snippet: snippets/snippet-pom.xml.jinja
+
+    - type: edit-xml
+      trigger: after-render 
+      path: pom.xml
+      encoding: UTF-8
+      changes:
+        - xpath: .//dependencies
+          append:
+            snippet: snippets/snippet-pom.xml.jinja
+          when:
+            not-exists: "./dependencies/dependency/artifactId[.='spring-boot-starter-actuator']/.."
+    
+    # - type: edit
+    #   path: src/main/resources/application.yaml
+    #   trigger: after-render    
+    #   changes:
+    #       - insert:
+    #           line: -1
+    #           snippet: snippets/snippet-application.yaml.jinja
+    #           when:
+    #             not-exists: "management:"
+
+    - type: edit-yaml
+      path: src/main/resources/application.yaml
+      trigger: after-render
+      indent: 4
+      encoding: UTF-8
+      changes:
+          - yamlpath: "$"
+            update:
+                snippet: snippets/snippet-application.yaml.jinja
+            when:
+                not-exists: "$.management.endpoints"

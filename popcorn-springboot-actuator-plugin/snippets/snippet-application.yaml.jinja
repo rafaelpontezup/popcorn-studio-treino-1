@@ -1,0 +1,19 @@
+
+##
+# Spring Actuator
+##
+management:
+    endpoints:
+        jmx:
+            exposure:
+                include: "*"
+        web:
+            exposure:
+                include: {{actuator_endpoints_joined}}
+    endpoint:
+        health:
+            show-details: always
+            show-components: always
+            probes:
+                enabled: true
+                add-additional-paths: true
