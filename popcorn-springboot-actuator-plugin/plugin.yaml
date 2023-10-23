@@ -1,0 +1,41 @@
+schema-version: v2
+kind: plugin
+metadata:
+  name: popcorn-springboot-actuator-plugin
+  display-name: popcorn-springboot-actuator-plugin
+  description: Habilita microsserviço a expor endpoint de monitoramento e health checking via modulo Spring Boot Actuator
+  version: 0.0.1
+  picture: plugin.png
+spec:
+  type: app
+  compatibility:
+    - python
+  about: docs/about.md
+  implementation: docs/implementation.md
+  release-notes: docs/release-notes-0.0.1.md
+  requirements: docs/requirements.md
+  single-use: False
+  repository: git@github.com:rafaelpontezup/popcorn-studio-treino-1.git
+  technologies: # Ref: https://docs.stackspot.com/content-creator/studio/yaml-files/plugin-yaml/#technologies
+    - Api
+  stk-projects-only: false
+  inputs:
+    - label: Type name of your resource
+      name: resource
+      type: text
+      required: true
+      default: Client
+      pattern: '([A-Z][a-z]+)+'
+      help: 'Inform your resource name (e.g.: Client)'
+    - label: Choose http method of new endpoint
+      name: method
+      type: text
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: GET
+      required: true
+      help: 'Inform the method of the endpoint (e.g.: post or delete)'
