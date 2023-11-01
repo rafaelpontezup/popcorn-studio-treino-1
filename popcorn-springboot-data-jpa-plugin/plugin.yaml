@@ -39,7 +39,7 @@ spec:
       help: Pacote base raiz (group_id + artifact_id)
   computed-inputs:
     database_name_formatted: "{{database_name | lower}}"
-    project_base_package_dir: {{project_base_package | group_id_folder }}
+    project_base_package_dir: "{{project_base_package | group_id_folder }}"
   
   hooks:
     ##
