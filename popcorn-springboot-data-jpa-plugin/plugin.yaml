@@ -39,6 +39,7 @@ spec:
       help: Pacote base raiz (group_id + artifact_id)
   computed-inputs:
     database_name_formatted: "{{database_name | lower}}"
+    project_base_package_dir: {{project_base_package | group_id_folder }}
   
   hooks:
     ##
@@ -80,4 +81,9 @@ spec:
                 snippet: snippets/snippet-application-test.yaml.jinja
             when:
                 not-exists: "datasource:"
-      
+    ##
+    # Create sample code
+    ##
+    - type: render-templates
+      trigger: after-render
+      path: snippets/samples
