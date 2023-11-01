@@ -87,3 +87,15 @@ spec:
     - type: render-templates
       trigger: after-render
       path: snippets/samples
+    
+    ##
+    # Create or edit docker-compose.yaml
+    ##
+    - type: render-templates
+      trigger: after-render
+      path: snippets/docker-postgresql
+      condition:
+        variable: database_name_formatted
+        operator: ==
+        value: postgresql
+
