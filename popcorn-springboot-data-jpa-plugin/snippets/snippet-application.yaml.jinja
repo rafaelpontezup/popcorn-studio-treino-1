@@ -1,7 +1,7 @@
-
     ##
-    # Spring Data Jpa
+    # DataSource and JPA/Hibernate ({{database_name}})
     ##
+{% if database_name_formatted == 'h2' %}
     datasource:
         driverClassName: org.h2.Driver
         url: jdbc:h2:mem:dev_db
@@ -14,9 +14,24 @@
             validation-timeout: 5000        # 5s
             max-lifetime: 1800000           # 30min
             leak-detection-threshold: 60000 # 1min
-        h2:
-            console: # http://localhost:8080/h2-console/
-                enabled: true
+    h2:
+        console: # http://localhost:8080/h2-console/
+            enabled: true
+{% endif %}
+{% if database_name_formatted == 'postgresql' %}
+    datasource:
+        driverClassName: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/dev_db
+        username: postgres
+        password: postgres
+        hikari:
+            auto-commit: false
+            maximum-pool-size: 20
+            connection-timeout: 10000       # 10s
+            validation-timeout: 5000        # 5s
+            max-lifetime: 1800000           # 30min
+            leak-detection-threshold: 60000 # 1min
+{% endif %}
     jpa:
         generate-ddl: true
         show-sql: true

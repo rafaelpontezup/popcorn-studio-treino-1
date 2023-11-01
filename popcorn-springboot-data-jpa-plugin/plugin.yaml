@@ -37,6 +37,9 @@ spec:
       required: true
       default: br.com.zup.popcornstudio.demo
       help: Pacote base raiz (group_id + artifact_id)
+  computed-inputs:
+    database_name_formatted: "{{database_name | lower}}"
+  
   hooks:
     ##
     # Edit pom.xml
