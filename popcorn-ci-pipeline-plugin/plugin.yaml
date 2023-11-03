@@ -2,7 +2,7 @@ schema-version: v2
 kind: plugin
 metadata:
   name: popcorn-ci-pipeline-plugin
-  display-name: popcorn-ci-pipeline-plugin
+  display-name: CI Pipeline plugin
   description: Habilita capacidade a suportar pipeline de CI com Github Actions
   version: 0.0.1
   picture: plugin.png
@@ -18,24 +18,17 @@ spec:
   repository: git@github.com:rafaelpontezup/popcorn-studio-treino-1.git
   technologies: # Ref: https://docs.stackspot.com/create-use/create-content/yaml-files/plugin-yaml/#technologies-1
     - Api
+    - Java
+    - Maven
   stk-projects-only: false
   inputs:
-    - label: Type name of your resource
-      name: resource
-      type: text
-      required: true
-      default: Client
-      pattern: '([A-Z][a-z]+)+'
-      help: 'Inform your resource name (e.g.: Client)'
-    - label: Choose http method of new endpoint
-      name: method
+    - label: Qual a versão do Java utilizada pela aplicação?
+      name: project_java_version
       type: text
       items:
-        - GET
-        - POST
-        - PUT
-        - DELETE
-        - PATCH
-      default: GET
+        - "17"
+        - "21"
+      default: 17
       required: true
-      help: 'Inform the method of the endpoint (e.g.: post or delete)'
+      help: 'Informe a versão do Java utilizada ou compatível com a aplicação'
+    
