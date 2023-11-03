@@ -29,7 +29,7 @@ spec:
       name: project_group_id
       type: text
       default: br.com.zup.cinema
-      pattern: '^[a-zA-Z][a-zA-Z0-9_](\\.[a-zA-Z][a-zA-Z0-9_])*$'
+      pattern: '(^[a-zA-Z_\d.]*[a-zA-Z_\d]$)'
       required: true
     - label: Artifact_ID do Maven
       name: project_artifact_id
@@ -50,12 +50,15 @@ spec:
         - "21"
       default: 17
       required: true
+      global: true
   computed-inputs:
     project_name_capitalized: "{{project_name | to_camel}}"
     project_artifact_id_formatted: "{{project_artifact_id | lower | to_kebab}}"
     project_artifact_id_sanitized: "{{project_artifact_id_formatted | regex_replace('[^0-9a-zA-Z_]', '')}}"
+  global-computed-inputs:
     project_base_package: "{{project_group_id}}.{{project_artifact_id_sanitized}}"
     project_base_package_dir: "{{project_base_package | group_id_folder}}"
+
   hooks:
     - type: run
       trigger: after-render

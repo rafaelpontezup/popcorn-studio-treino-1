@@ -31,6 +31,7 @@ spec:
         - PostgreSQL
       default: H2
       help: Se você não possui infraestrutura pronta, você pode escolher o H2 como banco em memória
+      global: true
     - label: Informe o pacote base do seu projeto
       name: project_base_package
       type: text
@@ -39,7 +40,7 @@ spec:
       help: Pacote base raiz (group_id + artifact_id)
   computed-inputs:
     database_name_formatted: "{{database_name | lower}}"
-    project_base_package_dir: "{{project_base_package | group_id_folder }}"
+    # project_base_package_dir: "{{project_base_package | group_id_folder }}"
   
   hooks:
     ##
